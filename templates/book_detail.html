@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "admin_dashboard.html" %}
+{% load static %}
+
+{% block title %}{{ book.title }} - Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center my-4">{{ book.title }}</h2>
+
+    <div class="card mx-auto" style="width: 30rem;">
+        {% if book.image %}
+            <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+        {% else %}
+            <img src="/media/default.jpg" class="card-img-top" alt="Default Image">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="card-text"><strong>Author:</strong> {{ book.author.name }}</p>
+            <p class="card-text"><strong>Genre:</strong> {{ book.genre }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ book.description }}</p>
+            <p class="card-text"><strong>Price:</strong> ₹{{ book.price }}</p>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

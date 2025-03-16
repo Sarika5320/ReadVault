@@ -5,3 +5,4 @@ admin.site.register(UserProfile)
 admin.site.register(Author)
 admin.site.register(Book)
 admin.site.register(CarouselImage)
+

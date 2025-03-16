@@ -1,0 +1,59 @@
+{% extends 'admin_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="update-container">
+    <h1>Update Book</h1>
+
+    <form action="" method="post" enctype="multipart/form-data" class="update-form">
+        {% csrf_token %}
+
+        <div class="row mb-3">
+            <label for="id_title" class="col-sm-3 col-form-label">Title:</label>
+            <div class="col-sm-9">
+                {{ form.title }}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="id_author" class="col-sm-3 col-form-label">Author:</label>
+            <div class="col-sm-9">
+                {{ form.author }}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="id_genre" class="col-sm-3 col-form-label">Genre:</label>
+            <div class="col-sm-9">
+                {{ form.genre }}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="id_price" class="col-sm-3 col-form-label">Price:</label>
+            <div class="col-sm-9">
+                {{ form.price }}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="id_description" class="col-sm-3 col-form-label">Description:</label>
+            <div class="col-sm-9">
+                {{ form.description }}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="id_image" class="col-sm-3 col-form-label">Book Cover:</label>
+            <div class="col-sm-9">
+                {{ form.image }}
+            </div>
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">Update Book</button>
+            <a href="{% url 'list_books' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

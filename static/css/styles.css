@@ -1,0 +1,78 @@
+/* Container Styling */
+.update-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.update-container h1 {
+  font-size: 24px;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Styling */
+.update-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Label & Input Alignment */
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-group label {
+  flex: 1;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  flex: 2;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+/* Textarea Styling */
+.form-group textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+/* Form Buttons */
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form-buttons .btn {
+  padding: 8px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}

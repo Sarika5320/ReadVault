@@ -1,15 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Welcome to Read Vault</h1>
-    <nav>
-        <a href="{% url 'home' %}">Home</a> |
-        <a href="{% url 'admin_dashboard' %}">Admin Panel</a>
-    </nav>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - My Website{% endblock %}
+
+{% block content %}
+
+<div id="carouselExampleIndicators fluid" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        {% for image in images %}
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+        {% endfor %}
+    </div>
+
+    <div class="carousel-inner">
+        {% for image in images %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.title }}">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<hr>
+<h2 class="text-center my-4">Best Sellers 📚</h2>
+
+<div class="container">
+    <div class="row">
+        {% for book in books %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 18rem;">
+                {% if book.image %}
+                    <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+                {% else %}
+                    <img src="/media/default.jpg" class="card-img-top" alt="Default Image">  <!-- Add a default image -->
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <a href="{% url 'details' book.id %}" class="btn btn-primary">More Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No books available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
