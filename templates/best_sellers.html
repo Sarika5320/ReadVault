@@ -1,0 +1,11 @@
+<h2>All Best Sellers</h2>
+<div class="book-list">
+    {% for book in books %}
+    <div class="book-item">
+        <img src="{{ book.image.url }}" alt="{{ book.title }}">
+        <h3>{{ book.title }}</h3>
+        <p>{{ book.author }}</p>
+        <p>₹{{ book.price }}</p>
+    </div>
+    {% endfor %}
+</div>

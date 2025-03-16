@@ -1,6 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Simple User Profile Model
+# User Profile Model
 class UserProfile(models.Model):
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
@@ -24,6 +25,7 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     genre = models.CharField(max_length=200, null=True)
     description = models.TextField(null=True, blank=True)
+    is_best_seller = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -35,3 +37,15 @@ class CarouselImage(models.Model):
 
     def __str__(self):
         return self.title if self.title else "Carousel Image"
+    
+
+class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Link cart to user
+    book = models.ForeignKey("Book", on_delete=models.CASCADE)  # Store book details
+    quantity = models.PositiveIntegerField(default=1)  # Allow multiple quantities
+
+    def total_price(self):
+        return self.quantity * self.book.price  # Calculate total price
+
+    def __str__(self):
+        return f"{self.quantity} x {self.book.title}"
