@@ -23,7 +23,6 @@
                 <td>Rs.{{ book.price }}</td>
                 <td>
                     <div class="d-flex flex-column"> <!-- Stack buttons vertically -->
-                        <a href="{% url 'book_detail' book.id %}" class="btn btn-primary btn-sm mb-1">View</a>
                         <a href="{% url 'update_book' book.id %}" class="btn btn-warning btn-sm mb-1">Update</a>
                         <a href="{% url 'delete_book' book.id %}" class="btn btn-danger btn-sm mb-1">Delete</a>
                     </div>

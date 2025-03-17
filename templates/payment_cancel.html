@@ -1,0 +1,9 @@
+{% extends 'home-base.html' %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2>Payment Canceled</h2>
+    <p>Your payment was canceled. You can try again.</p>
+    <a href="{% url 'checkout' %}" class="btn btn-primary">Retry Payment</a>
+    <a href="{% url 'cart' %}" class="btn btn-secondary">Back to Cart</a>
+</div>
+{% endblock %}

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home',
+    'admin_app',
+    'user_app',
 ]
 
 MIDDLEWARE = [
@@ -132,4 +133,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/login/'  
 LOGIN_REDIRECT_URL = '/'
+
+STRIPE_PUBLISHABLE_KEY='pk_test_51R3Z2HKzeW6o8p2RsQHKzsOTZe0aBhiGIUQQxzLeAikvwmplecf0vI5blOtsV9zy94W77A2zLQg1lOmFcDyeQvXS00iBaEEa9B'
+STRIPE_SECRET_KEY ='sk_test_51R3Z2HKzeW6o8p2RriI4M8vM4tQ3jakDHt4J8ygKcXkHSGIVILaIhuL5mh6VFLOlUQc9GLhSACcCOCuylz2RJTCe008FSqql7f'
 
