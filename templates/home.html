@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<!-- Bootstrap Carousel -->
+<!-- Hero Image Carousel -->
 <div id="carouselExample" class="carousel slide mt-5" data-bs-ride="carousel">
     <div class="carousel-inner">
         {% for image in images %}
@@ -25,29 +25,87 @@
 </div>
 
 <!-- Best Sellers Section -->
-<div class="container mt-4">
-    <h2>Best Sellers</h2>
-    <div class="owl-carousel best-sellers-carousel">
-        {% for book in best_sellers %}
-            <div class="item">
-                <div class="card text-center" style="width: 18rem;">
-                    <!-- Clicking the book redirects to details page -->
-                    <a href="{% url 'book_detail' book.id %}" class="text-decoration-none text-dark">
-                        <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}" style="height: 250px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ book.title }}</h5>
-                            <p class="card-text">{{ book.author }}</p>
-                            <p class="text-danger">₹{{ book.price }}</p>
-                        </div>
-                    </a>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Best Sellers</h2>
+    <div id="bestSellersCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for book in best_sellers %}
+                {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="row justify-content-center">
+                {% endif %}
+
+                <div class="col-md-4">
+                    <div class="card text-center shadow-sm" style="width: 18rem;">
+                        <a href="{% url 'book_detail' book.id %}" class="text-decoration-none text-dark">
+                            <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}" style="height: 250px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ book.title }}</h5>
+                                <p class="card-text">{{ book.author }}</p>
+                                <p class="text-danger">₹{{ book.price }}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        {% empty %}
-            <p class="text-center">No best-selling books available.</p>
-        {% endfor %}
+
+                {% if forloop.last or forloop.counter|divisibleby:3 %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% empty %}
+                <p class="text-center">No best-selling books available.</p>
+            {% endfor %}
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#bestSellersCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bestSellersCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
     </div>
 </div>
 
+<!-- All Books Section -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">All Books</h2>
+    <div id="allBooksCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for book in books %}
+                {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="row justify-content-center">
+                {% endif %}
+
+                <div class="col-md-4">
+                    <div class="card text-center shadow-sm" style="width: 18rem;">
+                        <a href="{% url 'book_detail' book.id %}" class="text-decoration-none text-dark">
+                            <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}" style="height: 250px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ book.title }}</h5>
+                                <p class="card-text">{{ book.author }}</p>
+                                <p class="text-danger">₹{{ book.price }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                {% if forloop.last or forloop.counter|divisibleby:3 %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% empty %}
+                <p class="text-center">No books available.</p>
+            {% endfor %}
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#allBooksCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#allBooksCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>
 
 {% endblock %}
-

@@ -46,7 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     
-    
+    document.getElementById("searchForm").addEventListener("submit", function() {
+        document.getElementById("searchResults").innerHTML = ""; // Clears search results before showing new ones
+    }); 
 
 
 

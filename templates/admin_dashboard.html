@@ -33,13 +33,13 @@
                         <a href="{% url 'admin_dashboard' %}" class="nav-link active">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'list_books' %}" class="nav-link">Books</a>
+                        <a href="{% url "manage_book" %}" class="nav-link">Manage Books</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'list_authors' %}" class="nav-link">Authors</a>
+                        <a href="{% url 'list_authors' %}" class="nav-link">Manage Authors</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Users</a>
+                        <a href="#" class="nav-link">Manage Users</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">Settings</a>
@@ -49,7 +49,9 @@
 
             <!-- Content Area -->
             <div class="col-md-10 p-4">
-                {% block content %}{% endblock %}
+                {% block content %}
+                
+                {% endblock %}
             </div>
         </div>
     </div>

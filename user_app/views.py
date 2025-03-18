@@ -1,10 +1,10 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Book, CartItem,Payment
 from admin_app.models import CarouselImage 
-from user_app.forms import AuthorForm
 from .models import UserProfile
 import stripe
 from django.conf import settings
@@ -16,15 +16,33 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def home(request):
     images = CarouselImage.objects.all()
     best_selling_books = Book.objects.filter(is_best_seller=True)
+    all_books = Book.objects.all() 
     context = {
         "images": images,
         "best_sellers": best_selling_books,
+        "books": all_books,
     }
     return render(request,'home.html',context)
 
 def best_sellers(request):
     books = Book.objects.filter(is_best_seller=True)
     return render(request,"home.html", {"books": books})
+
+#search books
+
+def search_books(request):
+    query = request.GET.get('q')  # Get the search input
+    books = Book.objects.all()  
+
+    if query:
+        books = books.filter(
+            Q(title__icontains=query) | 
+            Q(author__name__icontains=query) |  # If author is a ForeignKey, use `author__name`
+            Q(category__name__icontains=query)  # If category is a ForeignKey, use `category__name`
+        )
+
+    return render(request, 'search_results.html', {'books': books, 'query': query})
+
 
 def add_to_cart(request, book_id):
     book = get_object_or_404(Book, id=book_id)
@@ -102,7 +120,7 @@ def create_checkout_session(request):
 
         return redirect(session.url)  # Redirect the user to Stripe checkout
 
-    except stripe.error.StripeError as e:
+    except stripe.error.StripeError as e: # type: ignore
         print(f"Stripe Error: {e}")
         return redirect("cart")
 

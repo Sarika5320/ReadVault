@@ -5,6 +5,14 @@
 <div class="update-container">
     <h1>Update Book</h1>
 
+    {% if messages %}
+    <div class="alert alert-info">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <form action="" method="post" enctype="multipart/form-data" class="update-form">
         {% csrf_token %}
 
@@ -44,6 +52,13 @@
         </div>
 
         <div class="row mb-3">
+            <label for="id_category" class="col-sm-3 col-form-label">Category:</label>
+            <div class="col-sm-9">
+                {{ form.category }}
+            </div>
+        </div>
+
+        <div class="row mb-3">
             <label for="id_image" class="col-sm-3 col-form-label">Book Cover:</label>
             <div class="col-sm-9">
                 {{ form.image }}
@@ -52,7 +67,7 @@
 
         <div class="form-buttons">
             <button type="submit" class="btn btn-primary">Update Book</button>
-            <a href="{% url 'list_books' %}" class="btn btn-secondary">Cancel</a>
+            <a href="{% url 'manage_book' %}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>
